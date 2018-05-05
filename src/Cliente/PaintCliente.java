@@ -6,6 +6,7 @@
 package Cliente;
 
 import Clases.Lienzo;
+import Servidor.PaintServidor;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.HeadlessException;
@@ -42,7 +43,7 @@ public class PaintCliente extends JFrame{
     public static void main(String[] args) {
         // TODO code application logic here
         PaintCliente obj;
-        
+        PaintServidor obj2=new PaintServidor();
         obj=new PaintCliente();
                 
         
