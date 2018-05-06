@@ -38,12 +38,11 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
         Graphics2D g2= (Graphics2D) g; 
         g2.setStroke(new BasicStroke(2));
         g2.setColor(Color.BLACK);
-        System.out.println("Pintando "+pintando);
         if(x!=-1 && xf!=-1){            
             g2.drawLine(x, y, xf, yf);            
         }
         if(!pintando){
-            g2.drawRect(xc, yc, 0, 0);
+            g2.fillOval(xc, yc, 4, 4);
             pintando=true;
         }
     }
@@ -54,7 +53,6 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
             pintando = false;
             xc=e.getX();
             yc=e.getY();
-            System.out.println("Presionado");
             sendData();
             paint(this.getGraphics());            
             xc=-1;
