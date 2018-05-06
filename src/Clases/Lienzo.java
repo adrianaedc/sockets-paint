@@ -20,8 +20,8 @@ import java.util.logging.Logger;
  */
 public class Lienzo extends Canvas implements MouseListener, MouseMotionListener {
     
-    int x=-1, xf=-1, y=-1, yf=-1,xc=-1,yc=-1;//Coordenadas x es la posicion inicial x, xf la final x y xc es la posicion solo para el clickeo sin drag del mouse
-    boolean pintando,cliente;//la bandera cliente la hice con el fin de que funcione el mismo lienzo para el cliente y el servidor
+    public int x=-1, xf=-1, y=-1, yf=-1,xc=-1,yc=-1;//Coordenadas x es la posicion inicial x, xf la final x y xc es la posicion solo para el clickeo sin drag del mouse
+    public boolean pintando,cliente;//la bandera cliente la hice con el fin de que funcione el mismo lienzo para el cliente y el servidor
     
     public Lienzo(boolean cliente) {//Constructor
         
@@ -51,21 +51,15 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
     @Override
     public void mouseClicked(MouseEvent e) {//evento click del mouse
         if(cliente){
-            /*try {
-                Socket socketCliente= new Socket("localhost",8081);
-
-                DataOutputStream mensaje = new DataOutputStream(socketCliente.getOutputStream());
-                mensaje.writeUTF(xc+","+yc);*/
-                 pintando = false;
+            pintando = false;
             xc=e.getX();
             yc=e.getY();
             System.out.println("Presionado");
-            paint(this.getGraphics());  
-               /* mensaje.close();
-            } catch (IOException ex) {
-                System.out.println("No se ha conectado mensaje de error: "+ex.getMessage());
-            }*/
-        }      
+            sendData();
+            paint(this.getGraphics());            
+            xc=-1;
+            yc=-1;
+        }     
     }
 
     @Override
@@ -82,31 +76,41 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
         if(cliente){
             x=-1;
             xf=-1;
+            sendData();
             paint(this.getGraphics());
         }       
-    }
+    }   
     
     @Override
     public void mouseDragged(MouseEvent e) {//evento de arrastre depues de haber clickado
         if (cliente){
             xf=e.getX();
             yf=e.getY();
+            sendData();
             paint(this.getGraphics());
             x=e.getX();
             y=e.getY();
+            sendData();
         }        
     }
+    public void sendData(){
+        try {        
+                Socket socketCliente= new Socket("localhost",8081);
+                DataOutputStream mensaje = new DataOutputStream(socketCliente.getOutputStream()); 
+                mensaje.writeUTF(x+","+y+","+xf+","+yf+","+xc+","+yc+","+pintando);
+                mensaje.close();                                 
+            }catch (IOException ex) {
+                System.out.println("No se ha conectado mensaje de error: "+ex.getMessage());
+            }
+    }
     
-    @Override
-    public void mouseMoved(MouseEvent e) {
-    }    
-    @Override
+     @Override
     public void mouseEntered(MouseEvent e) {
     }
     @Override
     public void mouseExited(MouseEvent e) {
     }
-
-    
-    
+     @Override
+    public void mouseMoved(MouseEvent e) {
+    }      
 }
