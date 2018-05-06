@@ -52,6 +52,8 @@ public class PaintServidor extends JPanel implements Runnable{
                 lienzo.xc=Integer.parseInt(tok.nextToken());
                 lienzo.yc=Integer.parseInt(tok.nextToken());
                 lienzo.pintando=Boolean.parseBoolean(tok.nextToken());
+                lienzo.c=Integer.parseInt(tok.nextToken());
+                
                 //System.out.println("Coordenadas"+cadena);
                 lienzo.paint(lienzo.getGraphics());
                 miSocket.close();

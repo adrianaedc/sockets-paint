@@ -25,7 +25,9 @@ public class VentanaPrincipal extends JFrame {
     PaintServidor servidor;
     
     public VentanaPrincipal(){
+        super.setTitle("Paint");
         crearMenu();
+        
         boton=false;
         boton2=false;
         escuchar=true;
@@ -61,7 +63,7 @@ public class VentanaPrincipal extends JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
+                setSize(Constantes.WIDTH+20, Constantes.HEIGHT);
                 add(cliente);               
                 
             }
@@ -77,6 +79,8 @@ public class VentanaPrincipal extends JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                setSize(Constantes.WIDTH-87, Constantes.HEIGHT);
+                
                 add(servidor);
             }
         });   
