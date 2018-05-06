@@ -111,7 +111,7 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
     }
     public void sendData(){
         try {        
-                Socket socketCliente= new Socket("192.168.1.100",8081);
+                Socket socketCliente= new Socket("localhost",8081);
                 DataOutputStream mensaje = new DataOutputStream(socketCliente.getOutputStream()); 
                 mensaje.writeUTF(x+","+y+","+xf+","+yf+","+xc+","+yc+","+pintando+","+c);
                 mensaje.close();                                 
