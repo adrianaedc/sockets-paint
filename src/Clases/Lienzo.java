@@ -23,8 +23,10 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
     public int x=-1, xf=-1, y=-1, yf=-1,xc=-1,yc=-1;//Coordenadas x es la posicion inicial x, xf la final x y xc es la posicion solo para el clickeo sin drag del mouse
     public boolean pintando,cliente;//la bandera cliente la hice con el fin de que funcione el mismo lienzo para el cliente y el servidor
     public int c=1;
-    public Lienzo(boolean cliente) {//Constructor
-        
+    private String ip;
+    
+    public Lienzo(boolean cliente, String ip) {//Constructor
+        this.ip = ip;
         this.cliente=cliente;
         super.setBounds(5,5,460,450);
         super.setBackground(Color.white);
@@ -111,7 +113,7 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
     }
     public void sendData(){
         try {        
-                Socket socketCliente= new Socket("localhost",8081);
+                Socket socketCliente= new Socket(this.ip,8081);
                 DataOutputStream mensaje = new DataOutputStream(socketCliente.getOutputStream()); 
                 mensaje.writeUTF(x+","+y+","+xf+","+yf+","+xc+","+yc+","+pintando+","+c);
                 mensaje.close();                                 

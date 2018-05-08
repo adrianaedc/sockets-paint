@@ -20,13 +20,13 @@ public class PaintCliente extends JPanel implements Runnable{
     
     Lienzo lienzo;
     String cadena;
-    Thread hiloEscucha;   
+    Thread hiloEscucha;  
     
-    public PaintCliente() {        
+    public PaintCliente(String ip) {        
         super.setBounds(0, 0, 480, 480);
         super.setVisible(true);
         super.setLayout(null);
-        lienzo=new Lienzo(false);   
+        lienzo=new Lienzo(false,ip);   
         super.add(lienzo);
         hiloEscucha= new Thread(this);
         hiloEscucha.start();
