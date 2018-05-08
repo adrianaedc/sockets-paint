@@ -63,9 +63,9 @@ public class VentanaPrincipal extends JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                setSize(Constantes.WIDTH+20, Constantes.HEIGHT);
-                add(cliente);               
-                
+                setSize(Constantes.WIDTH-87, Constantes.HEIGHT);       
+                setTitle("Cliente");
+                add(cliente);        
             }
         });      
         
@@ -79,8 +79,8 @@ public class VentanaPrincipal extends JFrame {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                setSize(Constantes.WIDTH-87, Constantes.HEIGHT);
-                
+                setSize(Constantes.WIDTH+20, Constantes.HEIGHT);      
+                setTitle("Servidor");
                 add(servidor);
             }
         });   
@@ -93,9 +93,5 @@ public class VentanaPrincipal extends JFrame {
         p.setVisible(false);
         super.remove(p);
     }
-    
-
-   
-    
     
 }
