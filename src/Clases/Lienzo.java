@@ -84,7 +84,8 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
     public void mousePressed(MouseEvent e) {//evento cuando se deja presionado el click
         if(cliente){
             x=e.getX();
-            y=e.getY();       
+            y=e.getY();
+            sendData();       
             paint(this.getGraphics());
         }        
     }
@@ -109,6 +110,7 @@ public class Lienzo extends Canvas implements MouseListener, MouseMotionListener
             x=e.getX();
             y=e.getY();
             sendData();
+            paint(this.getGraphics());
         }        
     }
     public void sendData(){
