@@ -20,7 +20,7 @@ import javax.swing.*;
 public class VentanaPrincipal extends JFrame {
     JPanel p;
     JButton clienteb, servidorb;
-    JTextField ipServ, ipClien;
+    JTextField ipClien;
     public boolean cl=false,sr,boton,boton2,escuchar;    
     PaintCliente cliente;
     PaintServidor servidor;
@@ -51,18 +51,14 @@ public class VentanaPrincipal extends JFrame {
         servidorb=new JButton("Servidor");
         servidorb.setBounds(350, 180,Constantes.WIDTHBUTTON, Constantes.HEIGTHBUTTON);
         servidorb.setVisible(true);
-     /*   ipClien = new JTextField("Ingrese la IP del cliente",13);
+        ipClien = new JTextField("Ingrese la IP del cliente",16);
         ipClien.setBounds(300, 280,200, 30);
-        ipClien.setVisible(true); */
-        ipServ = new JTextField("Ingrese la IP del servidor",13);
-        ipServ.setBounds(50, 280,200, 30);
-        ipServ.setVisible(true); 
+        ipClien.setVisible(true); 
         
         clienteb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {    
-                if(!ipServ.getText().equalsIgnoreCase("Ingrese la IP del servidor")){
-                    cliente= new PaintCliente(ipServ.getText());                
+                    cliente= new PaintCliente("");                
                     removerBotones();
 
                     try {
@@ -72,10 +68,7 @@ public class VentanaPrincipal extends JFrame {
                     }
                     setSize(Constantes.WIDTH-87, Constantes.HEIGHT);       
                     setTitle("Cliente");
-                    add(cliente);   
-                }else{
-                    JOptionPane.showMessageDialog(getFocusOwner(), "Por favor introduzca la IP para continuar", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                    add(cliente);  
             }
         });      
         
@@ -83,8 +76,8 @@ public class VentanaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {               
                                 
-             ///   if(!ipClien.getText().equalsIgnoreCase("Ingrese la IP del cliente")){
-                    servidor= new PaintServidor("");
+                if(!ipClien.getText().equalsIgnoreCase("Ingrese la IP del cliente")){
+                    servidor= new PaintServidor(ipClien.getText());
                     removerBotones();
                     try {
                         Thread.sleep(500);
@@ -95,14 +88,13 @@ public class VentanaPrincipal extends JFrame {
                     setSize(Constantes.WIDTH+20, Constantes.HEIGHT);      
                     setTitle("Servidor");
                     add(servidor);
-             /*   }else{
+                }else{
                     JOptionPane.showMessageDialog(getFocusOwner(), "Por favor introduzca la IP para continuar", "Error", JOptionPane.ERROR_MESSAGE);
-                } */
+                }
             }
         });   
         
-        p.add(ipServ);
-      //  p.add(ipClien);
+        p.add(ipClien);
         p.add(servidorb);
         p.add(clienteb);       
     }
