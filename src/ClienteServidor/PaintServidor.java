@@ -21,11 +21,11 @@ public class PaintServidor extends JPanel{
     JPanel panel;
     Lienzo lienzo;
     JButton borrar, rojo, azul, amarillo, verde, negro, marron;
-    public PaintServidor(){      
+    public PaintServidor(String ip){      
         super.setBounds(0, 0,480, 480);
         super.setVisible(true);
         super.setLayout(null);
-        lienzo=new Lienzo(true);
+        lienzo=new Lienzo(true,ip);
         super.add(lienzo);        
         borrar= new JButton("Borrar");
         borrar.setBounds(Constantes.HEIGHT-10, 10,100, 40);

@@ -20,6 +20,7 @@ import javax.swing.*;
 public class VentanaPrincipal extends JFrame {
     JPanel p;
     JButton clienteb, servidorb;
+    JTextField ipClien;
     public boolean cl=false,sr,boton,boton2,escuchar;    
     PaintCliente cliente;
     PaintServidor servidor;
@@ -43,48 +44,57 @@ public class VentanaPrincipal extends JFrame {
         p=new JPanel();
         p.setBounds(0, 0, Constantes.WIDTH,Constantes.HEIGHT);
         p.setVisible(true);
-        p.setLayout(null);        
+        p.setLayout(null);  
         clienteb=new JButton("Cliente");        
-        clienteb.setBounds(130, 180,Constantes.WIDTHBUTTON, Constantes.HEIGTHBUTTON);
+        clienteb.setBounds(100, 180,Constantes.WIDTHBUTTON, Constantes.HEIGTHBUTTON);
         clienteb.setVisible(true);        
         servidorb=new JButton("Servidor");
-        servidorb.setBounds(330, 180,Constantes.WIDTHBUTTON, Constantes.HEIGTHBUTTON);
+        servidorb.setBounds(350, 180,Constantes.WIDTHBUTTON, Constantes.HEIGTHBUTTON);
         servidorb.setVisible(true);
+        ipClien = new JTextField("Ingrese la IP del cliente",16);
+        ipClien.setBounds(300, 280,200, 30);
+        ipClien.setVisible(true); 
         
         clienteb.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {              
-               
-                cliente= new PaintCliente();                
-                removerBotones();
-                
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                setSize(Constantes.WIDTH-87, Constantes.HEIGHT);       
-                setTitle("Cliente");
-                add(cliente);        
+            public void actionPerformed(ActionEvent e) {    
+                    cliente= new PaintCliente("");                
+                    removerBotones();
+
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    setSize(Constantes.WIDTH-87, Constantes.HEIGHT);       
+                    setTitle("Cliente");
+                    add(cliente);  
             }
         });      
         
         servidorb.addActionListener(new ActionListener() {            
             @Override
-            public void actionPerformed(ActionEvent e) {
-                servidor= new PaintServidor();
-                removerBotones();
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            public void actionPerformed(ActionEvent e) {               
+                                
+                if(!ipClien.getText().equalsIgnoreCase("Ingrese la IP del cliente")){
+                    servidor= new PaintServidor(ipClien.getText());
+                    removerBotones();
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    setSize(Constantes.WIDTH+20, Constantes.HEIGHT);      
+                    setTitle("Servidor");
+                    add(servidor);
+                }else{
+                    JOptionPane.showMessageDialog(getFocusOwner(), "Por favor introduzca la IP para continuar", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                setSize(Constantes.WIDTH+20, Constantes.HEIGHT);      
-                setTitle("Servidor");
-                add(servidor);
             }
         });   
         
+        p.add(ipClien);
         p.add(servidorb);
         p.add(clienteb);       
     }
